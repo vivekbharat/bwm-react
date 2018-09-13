@@ -1,4 +1,4 @@
-import { FETCH_RENTALS, FETCH_RENTAL } from "./types";
+import { FETCH_RENTALS, FETCH_RENTAL, FETCH_RENTAL_INIT } from "./types";
 
 const rentals = [
   {
@@ -63,6 +63,9 @@ export const fetchRentals = () => {
 };
 
 export const fetchRental = rentalId => dispatch => {
+  dispatch({
+    type: FETCH_RENTAL_INIT
+  });
   setTimeout(() => {
     const rental = rentals.find(rental => rental.id === rentalId);
     dispatch({

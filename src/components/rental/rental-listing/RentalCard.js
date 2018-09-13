@@ -6,11 +6,11 @@ const RentalCard = props => {
 
   return (
     <div className="col-md-3 col-xs-6">
-      <Link to={`/rentals/${rental.id}`}>
+      <Link className="rental-detail-link" to={`/rentals/${rental.id}`}>
         <div className="card bwm-card">
           <img className="card-img-top" src={rental.image} alt="" />
           <div className="card-block">
-            <h6 className="card-subtitle">
+            <h6 className={`card-subtitle ${rental.category}`}>
               {rental.shared ? "shared" : "whole"} {rental.category} &#183;{" "}
               {rental.city}
             </h6>
