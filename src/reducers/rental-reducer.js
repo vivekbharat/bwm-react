@@ -16,6 +16,7 @@ const INITIAL_STATE = {
 export const rentalReducer = (state = INITIAL_STATE.rentals, action) => {
   switch (action.type) {
     case FETCH_RENTALS:
+      console.log(action.payload, "action payload");
       return { ...state, data: action.payload };
 
     default:
