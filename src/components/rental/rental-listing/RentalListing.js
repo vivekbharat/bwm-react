@@ -11,11 +11,11 @@ class RentalListing extends Component {
   }
 
   render() {
-    console.log(this.props.rentals);
+    // console.log(this.props.rentals.data, "Rental Listing");
     return (
       <section id="rentalListing">
         <h1 className="page-title">Your Home All Around the World</h1>
-        <RentalList rentals={this.props.rentals} />
+        <RentalList rentals={this.props.rentals.data} />
       </section>
     );
   }
@@ -23,7 +23,7 @@ class RentalListing extends Component {
 
 const mapStateToProps = state => {
   return {
-    rentals: state.rentals.data
+    rentals: state.rentals
   };
 };
 
