@@ -7,6 +7,7 @@ const config = require("../config/dev");
 
 exports.auth = (req, res) => {
   const { email, password } = req.body;
+  console.log("From React");
 
   if (!password || !email) {
     res.status(422).send({
@@ -74,10 +75,11 @@ exports.auth = (req, res) => {
 };
 
 exports.register = (req, res) => {
+  // console.log(req.body);
   const { username, email, password, confirmPassword } = req.body;
-
-  if (!password || !email)
-    res.status(422).send({
+  // console.log(password === confirmPassword);
+  if (!password || !email) {
+    return res.status(422).send({
       errors: [
         {
           title: "Invalid Credentials!",
@@ -85,9 +87,11 @@ exports.register = (req, res) => {
         }
       ]
     });
+  }
 
-  if (password !== confirmPassword)
-    res.status(422).send({
+  if (password !== confirmPassword) {
+    console.log(password, confirmPassword);
+    return res.status(422).send({
       errors: [
         {
           title: "invalid Password",
@@ -95,6 +99,7 @@ exports.register = (req, res) => {
         }
       ]
     });
+  }
 
   // res.send({ username, email });
   Users.findOne({ email })
@@ -118,7 +123,7 @@ exports.register = (req, res) => {
 
       newUser
         .save()
-        .then(user => res.json({ Registered: true }))
+        .then(user => res.json({ Registered: true, user }))
         .catch(err =>
           res.status(422).send({
             errors: normalizeErrors(err.errors)
