@@ -2,7 +2,7 @@ import React from "react";
 
 const BwmError = props => {
   const { errors } = props;
-  console.log("BWM Errors", errors);
+  // console.log("BWM Errors errors", typeof errors);
   return (
     errors.length > 0 && (
       <div className="alert alert-danger bwm-res-errors">

@@ -17,6 +17,6 @@ export const getRentalDates = (startAt, endAt, dateFormat) => {
   }
 
   tempDates.push(formattedEndAt.format(dateFormat));
-  console.log(tempDates, "tempDates");
+  // console.log(tempDates, "tempDates");
   return tempDates;
 };

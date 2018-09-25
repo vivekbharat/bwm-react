@@ -12,7 +12,7 @@ const BookingModal = props => {
     errors
   } = props;
   // console.log(booking.rental.dailyRate, "modal");
-  console.log(errors, "Modal Errors");
+  // console.log(errors, "Modal Errors");
   return (
     <Modal
       open={open}

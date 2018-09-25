@@ -64,8 +64,8 @@ function GeoCode(WrappedComponent) {
 
       return new Promise((resolve, reject) => {
         geoCoder.geocode({ address: location }, (result, status) => {
-          console.log("result:", result);
-          console.log("status:", status);
+          // console.log("result:", result);
+          // console.log("status:", status);
 
           if (status === "OK") {
             const geometry = result[0].geometry.location;
@@ -82,7 +82,7 @@ function GeoCode(WrappedComponent) {
 
     getGeoCodeLocation = () => {
       const location = this.props.location;
-      console.log(location, "location");
+      // console.log(location, "location");
 
       if (this.cacher.isValueCached(location)) {
         this.updateCoordinates(this.cacher.getCacheValue(location));

@@ -74,7 +74,7 @@ const loginFailure = errors => {
 
 export const checkAuthState = () => {
   return dispatch => {
-    console.log("Check Auth state - actions");
+    // console.log("Check Auth state - actions");
     if (authService.isAuthenticated()) {
       dispatch(loginSuccess());
     }
@@ -90,10 +90,10 @@ export const login = userData => {
         // console.log("actions", res.data);
         return res.data;
       })
-      .then(token => {
-        // console.log(token);
+      .then(json => {
+        console.log(json.token);
         // localStorage.setItem("auth_token", token);
-        authService.saveToken(token);
+        authService.saveToken(json.token);
         dispatch(loginSuccess());
       })
       .catch(error => {
@@ -110,10 +110,17 @@ export const logout = () => {
 };
 
 export const createBooking = booking => {
+  console.log("2. Create Booking Actions");
+  console.log(booking);
   return axiosInstance
     .post("/bookings", { ...booking })
-    .then(res => res.data)
-    .catch(({ response }) => {
-      return Promise.reject(response.data.errors);
+    .then(res => {
+      console.log("3.1 From API with booking result", res);
+      return res.data;
+    })
+    .catch(error => {
+      // console.log(error, "booking actions");
+      console.log("3.2 From API with Error result", error);
+      return Promise.reject(error.response.data.errors);
     });
 };
