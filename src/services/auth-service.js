@@ -33,7 +33,7 @@ class AuthService {
   isAuthenticated() {
     const token = this.getToken();
 
-    console.log("class file", token && this.isValid ? true : false);
+    // console.log("class file", token && this.isValid ? true : false);
     return token && this.isValidToken ? true : false;
   }
 }

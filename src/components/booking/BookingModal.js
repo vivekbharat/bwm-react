@@ -14,45 +14,36 @@ const BookingModal = props => {
   // console.log(booking.rental.dailyRate, "modal");
   console.log(errors, "Modal Errors");
   return (
-    <div>
-      <Modal open={open} onClose={closeModal} center>
-        <h2>Simple centered modal</h2>
-      </Modal>
-      <Modal
-        open={open}
-        onClose={closeModal}
-        little
-        classNames={{ modal: "booking-modal" }}
-      >
-        <h4 className="modal-title title">Confirm Booking </h4>
-        <p className="dates">
-          {booking.startAt} / {booking.endAt}
+    <Modal
+      open={open}
+      onClose={closeModal}
+      little
+      classNames={{ modal: "booking-modal" }}
+    >
+      <h4 className="modal-title title">Confirm Booking </h4>
+      <p className="dates">
+        {booking.startAt} / {booking.endAt}
+      </p>
+      <div className="modal-body">
+        <em>{booking.days}</em> nights /<em>{rentalPrice}$</em> per Night
+        <p>
+          Guests: <em>{booking.guests}</em>
         </p>
-        <div className="modal-body">
-          <em>{booking.days}</em> nights /<em>{rentalPrice}$</em> per Night
-          <p>
-            Guests: <em>{booking.guests}</em>
-          </p>
-          <p>
-            Price: <em>{booking.totalPrice}$ </em>
-          </p>
-          <p>Do you confirm your booking for selected days?</p>
-        </div>
-        <BwmError errors={errors} />
-        <div className="modal-footer">
-          <button
-            type="button"
-            className="btn btn-bwm"
-            onClick={confirmBooking}
-          >
-            Confirm
-          </button>
-          <button type="button" onClick={closeModal} className="btn btn-bwm">
-            Cancel
-          </button>
-        </div>
-      </Modal>
-    </div>
+        <p>
+          Price: <em>{booking.totalPrice}$ </em>
+        </p>
+        <p>Do you confirm your booking for selected days?</p>
+      </div>
+      <BwmError errors={errors} />
+      <div className="modal-footer">
+        <button type="button" className="btn btn-bwm" onClick={confirmBooking}>
+          Confirm
+        </button>
+        <button type="button" onClick={closeModal} className="btn btn-bwm">
+          Cancel
+        </button>
+      </div>
+    </Modal>
   );
 };
 

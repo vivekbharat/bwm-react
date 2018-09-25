@@ -4,7 +4,7 @@ import moment from "moment";
 
 import { getRentalDates } from "helpers";
 import BookingModal from "./BookingModal";
-import * as actions from "actions";
+import * as actions from "../../actions";
 // import { start } from "repl";
 
 class Booking extends Component {
