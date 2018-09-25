@@ -12,7 +12,7 @@ import {
 
 import AxiosService from "../services/AxiosService";
 
-const axiosInstance = AxiosService.getInstance();
+let axiosInstance = AxiosService.getInstance();
 
 //Rental Actions
 export const fetchRentals = () => dispatch => {
@@ -107,4 +107,13 @@ export const logout = () => {
   return {
     type: LOGOUT
   };
+};
+
+export const createBooking = booking => {
+  return axiosInstance
+    .post("/bookings", { ...booking })
+    .then(res => res.data)
+    .catch(({ response }) => {
+      return Promise.reject(response.data.errors);
+    });
 };

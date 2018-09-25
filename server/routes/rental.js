@@ -33,12 +33,7 @@ router.get("/:id", (req, res) => {
     .catch(err => {
       if (err) {
         return res.status(422).send({
-          errors: [
-            {
-              title: "Rental Error!",
-              detail: "Cannot Find rental"
-            }
-          ]
+          errors: [{ title: "Rental Error!", detail: "Cannot Find rental" }]
         });
       }
     });

@@ -5,12 +5,13 @@ const { normalizeErrors } = require("../helpers/mongoose");
 const moment = require("moment");
 
 exports.createBooking = (req, res) => {
+  console.log("it ran from server");
   const { startAt, endAt, totalPrice, guests, days, rental } = req.body;
-  console.log("1", startAt, endAt, totalPrice, guests, days, rental);
+  // console.log("1", startAt, endAt, totalPrice, guests, days, rental);
   const user = res.locals.user;
-  console.log("2", user);
+  // console.log("2", user);
   const booking = new Booking({ startAt, endAt, totalPrice, guests, days });
-  console.log("3", booking);
+  // console.log("3", booking);
   Rental.findById(rental._id)
     .populate("bookings")
     .populate("user")
