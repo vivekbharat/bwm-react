@@ -7,16 +7,17 @@ const moment = require("moment");
 exports.createBooking = (req, res) => {
   console.log("it ran from server");
   const { startAt, endAt, totalPrice, guests, days, rental } = req.body;
-  // console.log("1", startAt, endAt, totalPrice, guests, days, rental);
+  console.log("1. req.body", req.body);
   const user = res.locals.user;
-  // console.log("2", user);
+  console.log("2, ");
   const booking = new Booking({ startAt, endAt, totalPrice, guests, days });
-  // console.log("3", booking);
+  console.log("3, ");
   Rental.findById(rental._id)
     .populate("bookings")
     .populate("user")
     .then(foundRental => {
       if (foundRental.user.id === user.id) {
+        console.log("Invalid User, cannot create booking on your own rental");
         return res.status(422).send({
           errors: [
             {
@@ -31,6 +32,7 @@ exports.createBooking = (req, res) => {
         booking.user = user;
         booking.rental = foundRental;
         foundRental.bookings.push(booking);
+        console.log("Book if its a valid function ran");
 
         // foundRental.save();
         booking
@@ -42,17 +44,19 @@ exports.createBooking = (req, res) => {
               { $push: { bookings: booking } },
               function() {}
             );
-
+            console.log("Booking Confirmed", booking);
             return res.json({ startAt: booking.startAt, endAt: booking.endAt });
           })
           .catch(err => {
             if (err) {
+              console.log("Booking Error");
               return res
                 .status(422)
                 .send({ errors: normalizeErrors(err.errors) });
             }
           });
       } else {
+        console.log("Chosen dates are already taken");
         return res.status(422).send({
           errors: [
             {
@@ -76,6 +80,8 @@ exports.createBooking = (req, res) => {
 function isValidBooking(proposedBooking, rental) {
   let isValid = true;
 
+  console.log("is valid booking function ran");
+
   if (rental.bookings && rental.bookings.length > 0) {
     isValid = rental.bookings.every(booking => {
       const proposedStart = moment(proposedBooking.startAt);
@@ -90,6 +96,6 @@ function isValidBooking(proposedBooking, rental) {
       );
     });
   }
-
+  console.log(isValid);
   return isValid;
 }

@@ -89,6 +89,12 @@ class Booking extends Component {
     });
   };
 
+  addNewBookedOutDates = booking => {
+    const dateRange = getRentalDates(booking.startAt, booking.endAt, "Y/MM/DD");
+    console.log(this.bookedOutDates, "Booked out Dates");
+    this.bookedOutDates.push(...dateRange);
+  };
+
   confirmProposedBooking = () => {
     const { startAt, endAt } = this.state.proposedBooking;
     const days = getRentalDates(startAt, endAt, "Y/MM/DD").length - 1;
@@ -110,15 +116,18 @@ class Booking extends Component {
   };
 
   reserveRental = () => {
-    actions.createBooking(this.state.proposedBooking).then(
-      booking => {
-        debugger;
-      },
-      errors => {
-        console.log(errors, "reserve rental");
+    console.log("1. Confirm Button Clicked");
+    actions
+      .createBooking(this.state.proposedBooking)
+      .then(booking => {
+        console.log("4. BOoking Result React", booking);
+        this.addNewBookedOutDates(booking);
+        this.cancelProposedBooking();
+      })
+      .catch(errors => {
+        console.log("5. Errors with reserve rental", errors);
         this.setState({ errors });
-      }
-    );
+      });
   };
 
   render() {
