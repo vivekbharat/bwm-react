@@ -7,6 +7,7 @@ const config = require("../config/dev");
 
 exports.auth = (req, res) => {
   const { email, password } = req.body;
+  console.log(req.body);
   console.log("From React");
 
   if (!password || !email) {
