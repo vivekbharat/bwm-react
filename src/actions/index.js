@@ -83,15 +83,15 @@ export const checkAuthState = () => {
 
 export const login = userData => {
   return dispatch => {
-    // console.log("From actions");
+    console.log("From actions");
     return axios
       .post("/api/v1/users/auth", { ...userData })
       .then(res => {
-        // console.log("actions", res.data);
+        console.log("actions", res.data);
         return res.data;
       })
       .then(json => {
-        console.log(json.token);
+        // console.log(json.token);
         // localStorage.setItem("auth_token", token);
         authService.saveToken(json.token);
         dispatch(loginSuccess());
