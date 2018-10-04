@@ -99,3 +99,16 @@ function isValidBooking(proposedBooking, rental) {
   // console.log(isValid);
   return isValid;
 }
+
+exports.getUserBookings = (req, res) => {
+  const user = res.locals.user;
+
+  Booking.where({ user })
+    .populate("rental")
+    .then(foundBookings => {
+      return res.json(foundBookings);
+    })
+    .catch(err => {
+      return res.status(422).send({ errors: normalizeErrors(err.errors) });
+    });
+};
