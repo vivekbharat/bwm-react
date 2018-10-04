@@ -8,7 +8,7 @@ import LoginForm from "./LoginForm";
 class Login extends Component {
   loginUser = userData => {
     // console.log(this.props);
-    console.log("login", userData);
+    // console.log("login", userData);
     this.props.dispatch(actions.login(userData));
   };
 

@@ -2,7 +2,7 @@ import { LOGIN_FAILURE, LOGIN_SUCCESS, LOGOUT } from "../actions/types";
 
 const INITIAL_STATE = {
   isAuth: false,
-
+  username: "",
   errors: []
 };
 
@@ -11,7 +11,8 @@ export const authReducer = (state = INITIAL_STATE, action) => {
     case LOGIN_SUCCESS:
       return Object.assign({}, state, {
         isAuth: true,
-        errors: []
+        errors: [],
+        username: action.username
       });
 
     case LOGIN_FAILURE:
@@ -19,7 +20,8 @@ export const authReducer = (state = INITIAL_STATE, action) => {
 
     case LOGOUT:
       return Object.assign({}, state, {
-        isAuth: false
+        isAuth: false,
+        username: ""
       });
 
     default:
