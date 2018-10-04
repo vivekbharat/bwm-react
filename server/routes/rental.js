@@ -36,7 +36,7 @@ router.post("", UserControl.authMiddleware, (req, res) => {
     category,
     image,
     shared,
-    bedrroms,
+    bedrooms,
     description,
     dailyRate
   } = req.body;
@@ -47,7 +47,7 @@ router.post("", UserControl.authMiddleware, (req, res) => {
     "category: " + category,
     "image: " + image,
     "shared: " + shared,
-    "bedrroms: " + bedrroms,
+    "bedrooms: " + bedrooms,
     "description: " + description,
     "dailyRate: " + dailyRate
   );
@@ -60,7 +60,7 @@ router.post("", UserControl.authMiddleware, (req, res) => {
     category,
     image,
     shared,
-    bedrroms,
+    bedrooms,
     description,
     dailyRate
   });

@@ -7,7 +7,9 @@ import {
   FETCH_RENTAL_INIT,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  LOGOUT
+  LOGOUT,
+  FETCH_RENTALS_FAIL,
+  FETCH_RENTALS_INIT
 } from "./types";
 
 import AxiosService from "../services/AxiosService";
@@ -15,19 +17,34 @@ import AxiosService from "../services/AxiosService";
 let axiosInstance = AxiosService.getInstance();
 
 //Rental Actions
-export const fetchRentals = () => dispatch => {
+export const fetchRentals = city => dispatch => {
+  const url = city ? `/rentals/?city=${city}` : "/rentals";
+
+  dispatch(fetchRentalsInit());
   axiosInstance
-    .get("/rentals")
-    .then(res => {
-      return res.data;
-    })
+    .get(url)
+    .then(res => res.data)
     .then(rentals => {
       // console.log(rentals);
       dispatch({
         type: FETCH_RENTALS,
         payload: rentals
       });
-    });
+    })
+    .catch(({ response }) => dispatch(fetchRentalsFail(response.data.errors)));
+};
+
+const fetchRentalsInit = () => {
+  return {
+    type: FETCH_RENTALS_INIT
+  };
+};
+
+const fetchRentalsFail = errors => {
+  return {
+    type: FETCH_RENTALS_FAIL,
+    errors
+  };
 };
 
 export const fetchRental = rentalId => dispatch => {
@@ -60,8 +77,10 @@ export const register = userData => {
 };
 
 const loginSuccess = () => {
+  const username = authService.getUserName();
   return {
-    type: LOGIN_SUCCESS
+    type: LOGIN_SUCCESS,
+    username
   };
 };
 
@@ -83,11 +102,11 @@ export const checkAuthState = () => {
 
 export const login = userData => {
   return dispatch => {
-    console.log("From actions");
+    // console.log("From actions");
     return axios
       .post("/api/v1/users/auth", { ...userData })
       .then(res => {
-        console.log("actions", res.data);
+        // console.log("actions", res.data);
         return res.data;
       })
       .then(json => {
@@ -110,17 +129,29 @@ export const logout = () => {
 };
 
 export const createBooking = booking => {
-  console.log("2. Create Booking Actions");
-  console.log(booking);
+  // console.log("2. Create Booking Actions");
+  // console.log(booking);
   return axiosInstance
     .post("/bookings", { ...booking })
     .then(res => {
-      console.log("3.1 From API with booking result", res);
+      // console.log("3.1 From API with booking result", res);
       return res.data;
     })
     .catch(error => {
       // console.log(error, "booking actions");
-      console.log("3.2 From API with Error result", error);
+      // console.log("3.2 From API with Error result", error);
       return Promise.reject(error.response.data.errors);
+    });
+};
+
+export const createRental = rental => {
+  return axiosInstance
+    .post("/rentals", { ...rental })
+    .then()
+    .catch(res => {
+      return res.data;
+    })
+    .catch(err => {
+      return Promise.reject(err.response.data.errors);
     });
 };
