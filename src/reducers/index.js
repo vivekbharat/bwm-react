@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 
 import { rentalReducer, selectedRentalReducer } from "./rental-reducer";
 import { authReducer } from "./auth-reducer";
+import { bookingReducer } from "./booking-reducer";
 
 import { reducer as formReducer } from "redux-form";
 
@@ -12,7 +13,8 @@ export const init = () => {
     rentals: rentalReducer,
     rental: selectedRentalReducer,
     form: formReducer,
-    auth: authReducer
+    auth: authReducer,
+    booking: bookingReducer
   });
 
   const middleware = [thunk];

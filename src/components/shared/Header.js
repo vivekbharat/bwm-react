@@ -53,12 +53,12 @@ class Header extends Component {
             <Link className="dropdown-item" to="/Rentals/new">
               Create Rental
             </Link>
-            <a className="dropdown-item" to="#">
+            <Link className="dropdown-item" to="/rentals/manage">
               Manage Rentals
-            </a>
-            <a className="dropdown-item" to="#">
+            </Link>
+            <Link className="dropdown-item" to="/bookings/manage">
               Manage Bookings
-            </a>
+            </Link>
           </div>
         </div>
       );
@@ -73,6 +73,7 @@ class Header extends Component {
         <div className="container">
           <Link className="navbar-brand" to="/rentals">
             BookWithMe
+            <img src={process.env.PUBLIC_URL + "/img/react-logo.svg"} alt="" />
           </Link>
           <RentalSearchInput />
           <button

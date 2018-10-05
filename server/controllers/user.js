@@ -23,10 +23,7 @@ exports.auth = (req, res) => {
 
   Users.findOne({ email })
     .then(user => {
-      // console.log()
       if (!user) {
-        // console.log("It ran 5", user);
-
         res.status(422).send({
           errors: [
             {
