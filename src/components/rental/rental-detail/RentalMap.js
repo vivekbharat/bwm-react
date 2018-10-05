@@ -4,7 +4,7 @@ import MapWithGeoCode from "../../map/GoogleMap";
 export class RentalMap extends Component {
   render() {
     const { location } = this.props;
-    // const key = "AIzaSyCYevOdC59a92hnqOVnQouU6ByUx0P2BuI";
+
     const key2 = "AIzaSyD7Gz8fhyzLeMsHs-S0T0jbNSlY9LNNWtc";
     return (
       <MapWithGeoCode

@@ -3,7 +3,7 @@ const { normalizeErrors } = require("../helpers/mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 
-const config = require("../config/dev");
+const config = require("../config");
 
 exports.auth = (req, res) => {
   const { email, password } = req.body;
