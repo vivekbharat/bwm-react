@@ -79,7 +79,7 @@ export const getUserRental = () => {
 };
 
 export const deleteRental = id => {
-  console.log("Hitt 1", id);
+  // console.log("Hitt 1", id);
   return axiosInstance
     .delete(`/rentals/${id}`)
     .then(res => res.data)
@@ -112,7 +112,7 @@ const fetchUserBookingsFail = errors => {
 
 export const fetchUserBookings = () => dispatch => {
   dispatch(fetchUserBookingsInit());
-  console.log("HITTT 1");
+  // console.log("HITTT 1");
 
   axiosInstance
     .get("/bookings/manage")

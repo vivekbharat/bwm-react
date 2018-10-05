@@ -15,7 +15,7 @@ class RentalCreate extends Component {
   }
 
   createRental = rentalData => {
-    console.log(rentalData);
+    // console.log(rentalData);
     actions
       .createRental(rentalData)
       .then(rental => {

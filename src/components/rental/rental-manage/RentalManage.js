@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 
 import * as actions from "../../../actions";
 import RentalManageCard from "./RentalManageCard";

@@ -92,7 +92,7 @@ class Booking extends Component {
 
   addNewBookedOutDates = booking => {
     const dateRange = getRentalDates(booking.startAt, booking.endAt, "Y/MM/DD");
-    console.log(this.bookedOutDates, "Booked out Dates");
+    // console.log(this.bookedOutDates, "Booked out Dates");
     this.bookedOutDates.push(...dateRange);
   };
 
