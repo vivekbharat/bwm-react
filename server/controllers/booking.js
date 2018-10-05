@@ -102,6 +102,7 @@ function isValidBooking(proposedBooking, rental) {
 
 exports.getUserBookings = (req, res) => {
   const user = res.locals.user;
+  console.log("HITTT 2");
 
   Booking.where({ user })
     .populate("rental")
