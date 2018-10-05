@@ -1,4 +1,4 @@
 module.exports = {
-  mongoURI: process.debugPort.mongoURI,
+  mongoURI: process.env.mongoURI,
   SECRET: process.env.SECRET
 };
