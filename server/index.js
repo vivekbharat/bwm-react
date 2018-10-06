@@ -10,6 +10,7 @@ const Fakedb = require("./fake-db");
 const rentalRoutes = require("./routes/rental");
 const userRoutes = require("./routes/users");
 const bookingRoutes = require("./routes/bookings");
+const imageUploadRoutes = require("./routes/imageUpload");
 
 mongoose
   .connect(
@@ -33,6 +34,7 @@ app.use(bodyparser.json());
 app.use("/api/v1/rentals", rentalRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/bookings", bookingRoutes);
+app.use("/api/v1", imageUploadRoutes);
 
 if (process.env.NODE_ENV === "production") {
   const appPath = path.join(__dirname, "..", "build");
