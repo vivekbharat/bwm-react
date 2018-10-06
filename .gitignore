@@ -24,3 +24,5 @@ yarn-error.log*
 /src/**/*.css
 
 yarn.lock
+
+/server/config
