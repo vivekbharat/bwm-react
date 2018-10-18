@@ -12,12 +12,34 @@ import {
   FETCH_RENTALS_INIT,
   FETCH_USER_BOOKINGS_INIT,
   FETCH_USER_BOOKINGS_SUCCESS,
-  FETCH_USER_BOOKINGS_FAIL
+  FETCH_USER_BOOKINGS_FAIL,
+  UPDATE_RENTAL_SUCCESS,
+  UPDATE_RENTAL_FAIL,
+  RESET_RENTAL_ERRORS,
+  RELOAD_MAP,
+  RELOAD_MAP_FINISH
 } from "./types";
 
 import AxiosService from "../services/AxiosService";
 
 let axiosInstance = AxiosService.getInstance();
+
+export const verifyRentalOwner = rentalId => {
+  return axiosInstance.get(`/rentals/${rentalId}/verify-user`);
+};
+
+export const reloadMap = () => {
+  // console.log("running reload map");
+  return {
+    type: RELOAD_MAP
+  };
+};
+
+export const reloadMapFinish = () => {
+  return {
+    type: RELOAD_MAP_FINISH
+  };
+};
 
 //Rental Actions
 export const fetchRentals = city => dispatch => {
@@ -84,6 +106,41 @@ export const deleteRental = id => {
     .delete(`/rentals/${id}`)
     .then(res => res.data)
     .catch(err => Promise.reject(err.response.data.errors));
+};
+
+export const resetRental = () => {
+  return {
+    type: RESET_RENTAL_ERRORS
+  };
+};
+
+//UPDATE RENTAL ACTIONS
+const updateRentalSuccess = updatedRental => {
+  return {
+    type: UPDATE_RENTAL_SUCCESS,
+    rental: updatedRental
+  };
+};
+
+const updateRentalFail = errors => {
+  return {
+    type: UPDATE_RENTAL_FAIL,
+    errors
+  };
+};
+
+export const updateRental = (id, rentalData) => dispatch => {
+  return axiosInstance
+    .patch(`/rentals/${id}`, rentalData)
+    .then(res => res.data)
+    .then(updatedRental => {
+      dispatch(updateRentalSuccess(updatedRental));
+      if (rentalData.city || rentalData.street) {
+        // console.log("running reload map from update rental", rentalData);
+        dispatch(reloadMap());
+      }
+    })
+    .catch(({ response }) => dispatch(updateRentalFail(response)));
 };
 
 //End of Rental Actions
