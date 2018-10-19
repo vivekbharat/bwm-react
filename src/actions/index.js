@@ -271,3 +271,17 @@ export const createRental = rental => {
       return Promise.reject(err.response.data.errors);
     });
 };
+
+export const uploadImage = image => {
+  const formData = new FormData();
+
+  formData.append("image", image);
+
+  return axiosInstance
+    .post("/image-upload", formData)
+    .then(json => {
+      console.log(json.data.imageUrl);
+      return json.data.imageUrl;
+    })
+    .catch(({ response }) => Promise.reject(response.data.errors[0]));
+};

@@ -30,3 +30,6 @@ dev.js
 prod.js
 # /server/config/dev.js
 # /server/config/prod.js
+
+/server/config/dev.js
+/server/config/prod.js

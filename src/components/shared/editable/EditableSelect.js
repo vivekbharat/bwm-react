@@ -13,7 +13,7 @@ class EditableSelect extends EditableComponent {
 
   renderComponentView = () => {
     const { value, isActive } = this.state;
-    const { className, rows, cols, options } = this.props;
+    const { className, options } = this.props;
 
     if (isActive) {
       return (

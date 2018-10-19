@@ -13,6 +13,7 @@ import { Provider } from "react-redux";
 import Header from "./components/shared/Header";
 import RentalListing from "components/rental/rental-listing/RentalListing";
 import RentalDetails from "components/rental/rental-detail/RentalDetails";
+import RentalUpdate from "components/rental/rental-detail/RentalUpdate";
 import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 
@@ -75,6 +76,12 @@ class App extends Component {
                   component={RentalCreate}
                 />
                 <Route exact path="/rentals/:id" component={RentalDetails} />
+                <Route
+                  exact
+                  path="/rentals/:id/edit"
+                  component={RentalUpdate}
+                />
+
                 <Route exact path="/login" component={Login} />
                 <LoggedinRoute exact path="/register" component={Register} />
               </Switch>
